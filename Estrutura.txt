@@ -1,0 +1,47 @@
+PlanoInstalacao
+	id
+	descricao // (Monofasico - bifasico - trifasico)
+
+HorarioPreferencial 
+	id
+	descricao // melhor horario para a instalacao ( manha - tarde - noite - madrugada)
+
+Usuario
+	id
+	nome 
+	cpf
+	dataNascimento
+	telefoneContato
+	email
+	username
+	password
+		
+Endereco
+	id
+	logradouro
+	numero
+	cep
+	bairro // opcional
+	
+Papeis
+	id
+	usuario: Usuario
+	descricao //(DIRECTOR - USER - ISNTALLER)
+
+InstaladorOS
+	id
+	instalador: Usuario
+	dataAtribuicao
+	iniciado Boolean default(false)
+	finalizado Boolean default(false)
+
+OS
+	id
+	cliente: Usuario
+	dataContrato
+	horarioPreferencial :HorarioPrefere
+	planoInstalacao: PlanoInstalacao
+	instaladorOS: InstaladorOS
+	endereco:Endereco
+	dataInicioInstalacao
+	dataFinalInstalacao
