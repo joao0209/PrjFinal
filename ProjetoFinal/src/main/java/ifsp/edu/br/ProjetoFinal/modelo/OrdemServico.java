@@ -4,11 +4,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
 public class OrdemServico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotNull
     private Endereco endereco;
@@ -46,7 +47,7 @@ public class OrdemServico {
         dataFinalInstalacao = new Date();
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -77,7 +78,7 @@ public class OrdemServico {
     public void setInstalador(Usuario instalador) {
         this.instalador = instalador;
     }
-
+    
     public Date getDataContratacao() {
         return dataContratacao;
     }
@@ -91,7 +92,7 @@ public class OrdemServico {
     }
 
     public void setDataInicioIntalacao(Date dataInicioIntalacao) {
-        dataInicioIntalacao = dataInicioIntalacao;
+    	this.dataInicioIntalacao = dataInicioIntalacao;
     }
 
     public Date getDataFinalInstalacao() {
@@ -99,6 +100,6 @@ public class OrdemServico {
     }
 
     public void setDataFinalInstalacao(Date dataFinalInstalacao) {
-        dataFinalInstalacao = dataFinalInstalacao;
+        this.dataFinalInstalacao = dataFinalInstalacao;
     }
 }

@@ -1,23 +1,25 @@
 package ifsp.edu.br.ProjetoFinal.modelo;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotNull
     @Size(min=5, message="Informe o logradouro.")
     private String logradouro;
 
     @NotNull
-    private int numero;
+    private long numero;
 
     @NotNull
     private String cep;
@@ -27,9 +29,9 @@ public class Endereco {
 
     public Long getId() {
         return id;
-    }
+    } 
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -41,11 +43,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public int getNumero() {
+    public long getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(long numero) {
         this.numero = numero;
     }
 
