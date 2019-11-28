@@ -20,3 +20,22 @@ create table papeis (
 alter table papeis add constraint usuario_papel_unique unique(usuario_id, papel);
 alter table papeis add foreign key (usuario_id) references usuarios(id);
 
+drop table if exists endereco;
+create table endereco (
+	id identity primary key,
+	logradouro varchar(50) not null,
+	numero bigint not null,
+	cep varchar(10) not null,
+	bairro varchar(50) not null
+);
+
+drop table if exists ordem_servico;
+create table ordem_servico (
+	id identity primary key,
+	endereco_id bigint,
+	usuario_id bigint,
+	data_contratacao date not null,
+	data_inicio_instalacao date,
+	data_final_instalacao date
+);
+
