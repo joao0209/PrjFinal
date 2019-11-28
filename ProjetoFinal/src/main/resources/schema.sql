@@ -20,12 +20,6 @@ create table papeis (
 alter table papeis add constraint usuario_papel_unique unique(usuario_id, papel);
 alter table papeis add foreign key (usuario_id) references usuarios(id);
 
-drop table if exists plano;
-create table plano (
-	id identity
-	nome varchar(25) not null
-);
-
 drop table if exists endereco;
 create table endereco (
 	id identity primary key,
@@ -47,10 +41,6 @@ create table ordem_servico (
 	data_final_instalacao date
 );
 
-<<<<<<< HEAD
-
-
-=======
 drop table if exists plano_instalacao;
 create table plano_instalacao(
 	id identity primary key,
@@ -73,4 +63,3 @@ create table instalador_ordem_servico(
 );
 
 alter table instalador_ordem_servico add foreign key (instalador_id) references usuarios(id);
->>>>>>> refs/remotes/origin/master
