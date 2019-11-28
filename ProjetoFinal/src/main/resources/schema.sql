@@ -39,3 +39,23 @@ create table ordem_servico (
 	data_final_instalacao date
 );
 
+drop table if exists plano_instalacao;
+create table plano_instalacao(
+	id identity primary key,
+	descricao varchar(20) not null --// (Monofasico - bifasico - trifasico)
+)
+
+drop table if exists horario_preferencial;
+create table horario_preferencial(
+	id identity primary key,
+	descricao varchar(20) not null --// melhor horario para a instalacao ( manha - tarde - noite - madrugada)
+)
+
+drop table if exists instalador_ordem_servico;
+create table instalador_ordem_servico(
+	id identity primary key,
+	dataAtribuicao timestamp not null default(now()),
+	iniciado boolean not null default(false),
+	finalizado boolean not null default(false),
+	instalador: Usuario
+)
