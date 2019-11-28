@@ -8,3 +8,10 @@ insert into papeis (usuario_id, papel) values (1, 'ROLE_USER');
 insert into papeis (usuario_id, papel) values (2, 'ROLE_ADMIN');
 insert into papeis (usuario_id, papel) values (3, 'ROLE_OPERATION');
 
+delete from plano_instalacao;
+insert into plano_instalacao(descricao) values 
+('Monofasico'),('bifasico'), ('trifasico');
+
+delete from horario_preferencial;
+insert into horario_preferencial(descricao) values 
+('manha'),('tarde'), ('noite'), ('madrugada');

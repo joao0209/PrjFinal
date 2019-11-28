@@ -19,12 +19,8 @@ public class OrdemServico {
 
     private Usuario instalador;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Plano plano;
-
-    public enum Plano {
-        MONOFASICO, BIFASICO, TRIFASICO
-    }
 
     private Date dataContratacao;
 
@@ -51,7 +47,7 @@ public class OrdemServico {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -27,7 +27,7 @@ public class Endereco {
     @NotNull
     private String bairro;
 
-    public Long getId() {
+    public long getId() {
         return id;
     } 
 
