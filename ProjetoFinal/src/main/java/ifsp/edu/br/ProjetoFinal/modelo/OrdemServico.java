@@ -12,11 +12,14 @@ public class OrdemServico {
     private long id;
 
     @NotNull
+    @OneToOne
     private Endereco endereco;
 
     @NotNull
+    @OneToOne
     private Usuario cliente;
-
+    
+    @OneToOne
     private Usuario instalador;
 
     @Enumerated(EnumType.ORDINAL)
@@ -29,18 +32,10 @@ public class OrdemServico {
     private Date dataFinalInstalacao;
 
     @PrePersist
-    private void dataContratacao(){
+    private void batatinha(){
         dataContratacao = new Date();
-    }
-
-    @PrePersist
-    private void DataInicioIntalacao(){
-        dataInicioIntalacao = new Date();
-    }
-
-    @PrePersist
-    private void DataFinalInstalacao(){
         dataFinalInstalacao = new Date();
+        dataInicioIntalacao = new Date();
     }
 
     public long getId() {
