@@ -50,14 +50,3 @@ create table horario_preferencial(
 	id identity primary key,
 	descricao varchar(20) not null --// melhor horario para a instalacao ( manha - tarde - noite - madrugada)
 );
-
-drop table if exists instalador_ordem_servico;
-create table instalador_ordem_servico(
-	id identity primary key,
-	dataAtribuicao timestamp not null default(now()),
-	iniciado boolean not null default(false),
-	finalizado boolean not null default(false),
-	instalador_id bigint
-);
-
---alter table instalador_ordem_servico add foreign key (instalador_id) references usuarios(id);

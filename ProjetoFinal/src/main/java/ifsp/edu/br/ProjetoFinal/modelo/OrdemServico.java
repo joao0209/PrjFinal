@@ -20,7 +20,7 @@ public class OrdemServico {
 	private Usuario cliente;
 
 	@OneToOne
-	private InstaladorOrdemServico instalador;
+	private Usuario instalador;
 
 	@Enumerated(EnumType.ORDINAL)
 	private Plano plano;
@@ -63,14 +63,6 @@ public class OrdemServico {
 
 	public void setCliente(Usuario cliente) {
 		this.cliente = cliente;
-	}
-
-	public InstaladorOrdemServico getInstalador() {
-		return instalador;
-	}
-
-	public void setInstalador(InstaladorOrdemServico instalador) {
-		this.instalador = instalador;
 	}
 
 	public Date getDataContratacao() {
