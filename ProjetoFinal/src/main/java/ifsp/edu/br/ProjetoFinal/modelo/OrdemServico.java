@@ -7,90 +7,109 @@ import java.util.Date;
 @Entity
 public class OrdemServico {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    @NotNull
-    @OneToOne
-    private Endereco endereco;
+	@NotNull
+	@OneToOne
+	private Endereco endereco;
 
-    @NotNull
-    @OneToOne
-    private Usuario cliente;
-    
-    @OneToOne
-    private Usuario instalador;
+	@NotNull
+	@OneToOne
+	private Usuario cliente;
 
-    @Enumerated(EnumType.ORDINAL)
-    private Plano plano;
+	@OneToOne
+	private InstaladorOrdemServico instalador;
 
-    private Date dataContratacao;
+	@Enumerated(EnumType.ORDINAL)
+	private Plano plano;
 
-    private Date dataInicioIntalacao;
+	@Enumerated(EnumType.ORDINAL)
+	private Horario horario;
 
-    private Date dataFinalInstalacao;
+	private Date dataContratacao;
 
-    @PrePersist
-    private void batatinha(){
-        dataContratacao = new Date();
-        dataFinalInstalacao = new Date();
-        dataInicioIntalacao = new Date();
-    }
+	private Date dataInicioIntalacao;
 
-    public long getId() {
-        return id;
-    }
+	private Date dataFinalInstalacao;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	@PrePersist
+	private void batatinha() {
+		dataContratacao = new Date();
+		dataFinalInstalacao = new Date();
+		dataInicioIntalacao = new Date();
+	}
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public Usuario getCliente() {
-        return cliente;
-    }
+	public Endereco getEndereco() {
+		return endereco;
+	}
 
-    public void setCliente(Usuario cliente) {
-        this.cliente = cliente;
-    }
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 
-    public Usuario getInstalador() {
-        return instalador;
-    }
+	public Usuario getCliente() {
+		return cliente;
+	}
 
-    public void setInstalador(Usuario instalador) {
-        this.instalador = instalador;
-    }
-    
-    public Date getDataContratacao() {
-        return dataContratacao;
-    }
+	public void setCliente(Usuario cliente) {
+		this.cliente = cliente;
+	}
 
-    public void setDataContratacao(Date dataContratacao) {
-        this.dataContratacao = dataContratacao;
-    }
+	public InstaladorOrdemServico getInstalador() {
+		return instalador;
+	}
 
-    public Date getDataInicioIntalacao() {
-        return dataInicioIntalacao;
-    }
+	public void setInstalador(InstaladorOrdemServico instalador) {
+		this.instalador = instalador;
+	}
 
-    public void setDataInicioIntalacao(Date dataInicioIntalacao) {
-    	this.dataInicioIntalacao = dataInicioIntalacao;
-    }
+	public Date getDataContratacao() {
+		return dataContratacao;
+	}
 
-    public Date getDataFinalInstalacao() {
-        return dataFinalInstalacao;
-    }
+	public void setDataContratacao(Date dataContratacao) {
+		this.dataContratacao = dataContratacao;
+	}
 
-    public void setDataFinalInstalacao(Date dataFinalInstalacao) {
-        this.dataFinalInstalacao = dataFinalInstalacao;
-    }
+	public Date getDataInicioIntalacao() {
+		return dataInicioIntalacao;
+	}
+
+	public void setDataInicioIntalacao(Date dataInicioIntalacao) {
+		this.dataInicioIntalacao = dataInicioIntalacao;
+	}
+
+	public Date getDataFinalInstalacao() {
+		return dataFinalInstalacao;
+	}
+
+	public void setDataFinalInstalacao(Date dataFinalInstalacao) {
+		this.dataFinalInstalacao = dataFinalInstalacao;
+	}
+
+	public Plano getPlano() {
+		return plano;
+	}
+
+	public void setPlano(Plano plano) {
+		this.plano = plano;
+	}
+
+	public Horario getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Horario horarioPreferencial) {
+		this.horario = horarioPreferencial;
+	}
 }

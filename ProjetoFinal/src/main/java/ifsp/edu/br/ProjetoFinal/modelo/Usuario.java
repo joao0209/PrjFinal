@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -102,5 +103,21 @@ public class Usuario {
 	@PrePersist
 	private void data() {
 		this.creationDate = new Date();
+	}
+
+	public List<Papel> getPapeis() {
+		return papeis;
+	}
+
+	public void setPapeis(List<Papel> papeis) {
+		this.papeis = papeis;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 }

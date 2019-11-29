@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "papeis")
 public class Papel{
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,6 +22,22 @@ public class Papel{
 	private Papel() {}
 	
 	public Papel(String papel) {
+		this.papel = papel;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPapel() {
+		return papel;
+	}
+
+	public void setPapel(String papel) {
 		this.papel = papel;
 	}
 	
