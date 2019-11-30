@@ -1,11 +1,16 @@
 package ifsp.edu.br.ProjetoFinal.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -25,6 +30,22 @@ public class OrdemServicoController {
 	@GetMapping("/atual")
 	public String ordemServico() {
 		return "solicitacao";
+	}
+	
+	@ModelAttribute
+	public void popularListaOSAtradas(Model model) {
+		List<OrdemServico> ordensServico = new ArrayList<>(); 				
+		ordemServicoRepositorio.findOsAtrasada().forEach(ordensServico::add);
+	
+		model.addAttribute("ordensServicoAtrasadas", ordensServico);
+	}
+	
+	@ModelAttribute
+	public void popularListaOSFechadaPrazo(Model model) { // Pensar num forma de colocar isso por instalador :(
+		List<OrdemServico> ordensServico = new ArrayList<>(); 				
+		ordemServicoRepositorio.findOsFechadaEmDia().forEach(ordensServico::add);
+	
+		model.addAttribute("ordensServicoFechadasNoPrazo", ordensServico);
 	}
 
 	@PostMapping
