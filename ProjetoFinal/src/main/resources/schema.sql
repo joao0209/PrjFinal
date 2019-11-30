@@ -1,3 +1,5 @@
+drop table if exists ordem_servico;
+drop table if exists papeis;
 drop table if exists usuarios;
 create table usuarios (
 	id identity primary key,
@@ -32,21 +34,9 @@ create table ordem_servico (
 	id identity primary key,
 	endereco_id bigint,
 	cliente_id bigint not null,
-	plano_id bigint not null,
-	instalador_id bigint not null,
+	plano bigint not null,
+	instalador_id bigint not null default(0),
 	data_contratacao date not null,
 	data_inicio_instalacao date,
 	data_final_instalacao date
-);
-
-drop table if exists plano_instalacao;
-create table plano_instalacao(
-	id identity primary key,
-	descricao varchar(20) not null --// (Monofasico - bifasico - trifasico)
-);
-
-drop table if exists horario_preferencial;
-create table horario_preferencial(
-	id identity primary key,
-	descricao varchar(20) not null --// melhor horario para a instalacao ( manha - tarde - noite - madrugada)
 );

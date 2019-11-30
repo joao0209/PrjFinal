@@ -18,8 +18,8 @@ public class OrdemServico {
 	@NotNull
 	@OneToOne
 	private Usuario cliente;
-
-	@OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario instalador;
 
 	@Enumerated(EnumType.ORDINAL)
