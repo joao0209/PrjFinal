@@ -3,6 +3,8 @@ package ifsp.edu.br.ProjetoFinal.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,13 +22,19 @@ public class OrdemServicoRestController {
 		return repo.findAll();
 	}
 	
-	@GetMapping(path = "/notInitialized", produces = "application/json")
-	public Iterable<OrdemServico> getAllByNotInitialized() {
-		return repo.findAllByInstaladorId(0); // todos não iniciados
+	@GetMapping(path = "/notHasInstaller", produces = "application/json")
+	public Iterable<OrdemServico> getAllByNotHasInstaller() {
+		return repo.findAllByNotHasInstalador(); // todos que nao possuem instalador
 	}
 	
 	@GetMapping(path = "/{id}", produces = "application/json")
-	public Iterable<OrdemServico> getAllByInitialized(@PathVariable("id") long id) {
-		return repo.findAllByInstaladorId(id); // todos do instalador
+	public Iterable<OrdemServico> getAllByHasInstaller(@PathVariable("id") long id) {
+		return repo.findAllByInstaladorId(id); // todos do instalador que possui o id
+	}
+	
+	@PutMapping("/{id}")
+	public OrdemServico putOrdemServico(@PathVariable("id") long id, @RequestBody OrdemServico os) {
+		os.setId(id);
+		return repo.save(os);
 	}
 }

@@ -11,6 +11,9 @@ import ifsp.edu.br.ProjetoFinal.modelo.OrdemServico;
 public interface OrdemServicoRepositorio extends CrudRepository<OrdemServico, Long>{
 	List<OrdemServico> findAllByInstaladorId(long id);
 	
+	@Query("SELECT o FROM ordem_servico o WHERE o.instalador_id = null")
+	List<OrdemServico> findAllByNotHasInstalador();
+	
 	@Query("SELECT o FROM ordem_servico o WHERE o.data_contratacao+5 > o.data_final_instalacao") //Validar Querys
 	List<OrdemServico> findOsAtrasada();
 	
