@@ -28,7 +28,8 @@ public class OrdemServicoController {
 	private OrdemServicoRepositorio ordemServicoRepositorio;
 
 	@GetMapping("/atual")
-	public String ordemServico() {
+	public String ordemServico(Model model) {
+		model.addAttribute("ordemServico", new OrdemServico()); 
 		return "solicitacao";
 	}
 	
@@ -53,6 +54,13 @@ public class OrdemServicoController {
 		if (errors.hasErrors()) {
 			return "home";
 		}
+
+		System.out.println("-----Ordem de servi�o----");
+		System.out.println(ordemServico.getPlano());
+		System.out.println(ordemServico.getEndereco().getLogradouro());
+		System.out.println(ordemServico.getEndereco().getNumero());
+		System.out.println(ordemServico.getEndereco().getBairro());
+		System.out.println(ordemServico.getEndereco().getCep());
 
 		ordemServicoRepositorio.save(ordemServico);
 		sessionStatus.setComplete();

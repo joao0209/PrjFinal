@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro de Solicitacao</title>
-</head>
-<body>
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 
+<head>
+  <meta charset="utf-8">
+  <title>Cadastro de solicitação</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+  <div class="container" style="padding: 20px;">
+    <form method="POST" th:action="@{/solicitacao}" th:object="${ordemServico}">
+      <div class="form-group">
+        <div class="row align-items-center">
+          <div class="col-md6" style="padding: 40px;">
+            <label>Plano de instalação:</label>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="monofasico" name="plano" checked value="MONOFASICO" th:field="*{plano}">
+              <label class="custom-control-label" for="monofasico">Monofásico</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="bifasico" name="plano" value="BIFASICO" th:field="*{plano}">
+              <label class="custom-control-label" for="bifasico">Bifásico</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="trifasico" name="plano" value="TRIFASICO" th:field="*{plano}">
+              <label class="custom-control-label" for="trifasico">Trifásico</label>
+            </div>
+          </div>
+          <div class="col-md6" style="padding: 40px; background-color: cornflowerblue; border-radius: 10px;">
+            <h2>Dados Pessoais:</h2>
+            <label for="ruaInput">Logradouro:</label>
+            <input type="text" class="form-control" id="ruaInput" placeholder="Rua" name="rua" th:field="*{endereco.logradouro}">
+            <label for="numeroInput">Numero:</label>
+            <input type="number" class="form-control" id="numeroInput" placeholder="Numero" name="numero" th:field="*{endereco.numero}">
+            <label for="bairroInput">Bairro:</label>
+            <input type="text" class="form-control" id="bairroInput" placeholder="Bairro" name="bairro" th:field="*{endereco.bairro}">
+            <label for="CEPInput">CEP:</label>
+            <input type="number" class="form-control" id="CEPInput" placeholder="CEP" name="cep" th:field="*{endereco.cep}">
+          </div>
+        </div>
+        <div class="row" style="padding: 20px;">
+          <div class="col align-self-start">
+            <button class="btn btn-secondary">Voltar</button>
+          </div>
+          <div class="col align-self-end">
+            <button type="submit" class="btn btn-primary">Iniciar Ordem de Serviço</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
+@Table(name="ORDEM_SERVICO")
 public class OrdemServico {
 
 	@Id
@@ -12,7 +13,7 @@ public class OrdemServico {
 	private long id;
 
 	@NotNull
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 
 	@NotNull
