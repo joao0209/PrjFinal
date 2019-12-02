@@ -9,7 +9,9 @@ import {
     Typography, Modal
 } from '@material-ui/core';
 import InsideModalAssumir from "./InsideModalAssumir";
+import InsideModalDetalhar from "./InsideModalDetalhar";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import Search from '@material-ui/icons/Search'
 import DoneOutline from '@material-ui/icons/DoneOutline';
 import InsideModalFinalizar from './InsideModalFinalizar';
 
@@ -19,6 +21,7 @@ export default class home extends Component {
         this.state = {
             open: false,
             openFinalizar: false,
+            openListar: false,
             os: [],
             osAssumidos: [],
             currId: "",
@@ -51,7 +54,7 @@ export default class home extends Component {
                 horario: responseList[i].horario,
                 dataContratacao: responseList[i].dataContratacao,
                 dataInicioInstalacao: responseList[i].dataInicioInstalacao,
-                dataFimInstalacao: responseList[i].dataFimInstalacao,
+                dataFinalInstalacao: responseList[i].dataFinalInstalacao,
             };
             this.setState({
                 os: [...this.state.os, auxOS]
@@ -78,8 +81,8 @@ export default class home extends Component {
                 instalador: responseList[i].instalador,
                 horario: responseList[i].horario,
                 dataContratacao: responseList[i].dataContratacao,
-                dataInicioInstalacao: responseList[i].dataInicioInstalacao,
-                dataFimInstalacao: responseList[i].dataFimInstalacao,
+                dataInicioIntalacao: responseList[i].dataInicioIntalacao,
+                dataFinalInstalacao: responseList[i].dataFinalInstalacao,
             };
             this.setState({
                 osAssumidos: [...this.state.osAssumidos, auxOS]
@@ -114,22 +117,48 @@ export default class home extends Component {
             <ListItem key={osAssumido.id}>
                 <ListItemText
                     primary={osAssumido.plano}
-                    secondary={"Cliente: " + osAssumido.cliente.nome} />
+                    secondary={osAssumido.dataFinalInstalacao ? ("Finalizada em " + osAssumido.dataFinalInstalacao.split('T')[0]) : ("Cliente: " + osAssumido.cliente.nome) } />
                 <ListItemSecondaryAction >
-                    <IconButton aria-label="Finish" onClick={() => this.handleOpen("assumidos", osAssumido)}>
-                        <DoneOutline />
-                    </IconButton>
+                    {
+                        !osAssumido.dataFinalInstalacao ?  <IconButton aria-label="Finish" onClick={() => this.handleOpen("assumidos", osAssumido)}>
+                                                                <DoneOutline />
+                                                            </IconButton> : 
+                                                            <IconButton aria-label="Detail" onClick={() => this.handleOpen("assumidosList", osAssumido)}>
+                                                                <Search/>
+                                                            </IconButton>
+                    }
+                    
                 </ListItemSecondaryAction>
             </ListItem>
         );
     }
 
     handleOpen = (m, os) => {
-        m === 'assumidos' ? this.setState({openFinalizar: true, currId: os.id, currOS: os }) : this.setState({open: true, currId: os.id, currOS: os });
+        switch(m){
+            case 'assumidos':
+                this.setState({openFinalizar: true, currId: os.id, currOS: os });
+                break;
+            case 'naoAssumidos':
+                this.setState({open: true, currId: os.id, currOS: os });	
+                break;
+            case 'assumidosList':
+                this.setState({openListar: true, currId: os.id, currOS: os });
+                break;
+        }
     };
 
     handleClose = (m) => {
-        m === 'assumidos' ? this.setState({ openFinalizar: false }) : this.setState({ open: false });
+        switch(m){
+            case 'assumidos':
+                this.setState({ openFinalizar: false });
+                break;
+            case 'naoAssumidos':
+                this.setState({ open: false });
+                break;
+            case 'assumidosList':
+                this.setState({ openListar: false });
+                break;
+        }
     };
 
     render() {
@@ -150,6 +179,12 @@ export default class home extends Component {
                         currId={this.state.currId} 
                         ordemS={this.state.currOS}
                         instalador={this.state.instalador}/>
+                </Modal>
+                <Modal open={this.state.openListar} onClose={()=>this.handleClose('assumidosList')}>
+                    <InsideModalDetalhar 
+                        onClose={()=>this.handleClose('assumidosList')} 
+                        currId={this.state.currId} 
+                        ordemS={this.state.currOS}/>
                 </Modal>
                 <Grid container spacing={10} style={{ margin: 24, alignContent: 'center' }}>
                     <Grid item xs={8}>
