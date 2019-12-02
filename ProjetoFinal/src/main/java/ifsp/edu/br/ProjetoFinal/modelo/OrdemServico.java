@@ -23,6 +23,14 @@ public class OrdemServico {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario instalador;
 
+	public Usuario getInstalador() {
+		return instalador;
+	}
+
+	public void setInstalador(Usuario instalador) {
+		this.instalador = instalador;
+	}
+
 	@Enumerated(EnumType.ORDINAL)
 	private Plano plano;
 
