@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import ifsp.edu.br.ProjetoFinal.data.OrdemServicoRepositorio;
+import ifsp.edu.br.ProjetoFinal.modelo.Horario;
 import ifsp.edu.br.ProjetoFinal.modelo.OrdemServico;
+import ifsp.edu.br.ProjetoFinal.modelo.Plano;
 
 
 @Controller
@@ -29,7 +31,10 @@ public class OrdemServicoController {
 
 	@GetMapping("/atual")
 	public String ordemServico(Model model) {
-		model.addAttribute("ordemServico", new OrdemServico()); 
+		OrdemServico mOrdemServico = new OrdemServico();
+		mOrdemServico.setPlano(Plano.MONOFASICO);
+		mOrdemServico.setHorario(Horario.MANHA);
+		model.addAttribute("ordemServico", mOrdemServico); 
 		return "solicitacao";
 	}
 	
