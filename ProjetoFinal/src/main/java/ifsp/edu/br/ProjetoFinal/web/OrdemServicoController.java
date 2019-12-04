@@ -2,6 +2,7 @@ package ifsp.edu.br.ProjetoFinal.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -34,6 +35,7 @@ public class OrdemServicoController {
 		OrdemServico mOrdemServico = new OrdemServico();
 		mOrdemServico.setPlano(Plano.MONOFASICO);
 		mOrdemServico.setHorario(Horario.MANHA);
+		mOrdemServico.setDataContratacao(new Date());
 		model.addAttribute("ordemServico", mOrdemServico); 
 		return "solicitacao";
 	}
