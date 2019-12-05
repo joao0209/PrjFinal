@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>Cadastro de solicitação</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+  <div class="container" style="padding: 20px;">
+    <form method="POST" th:action="@{/painel}" th:object="${ordemServico}">
+      <div class="row align-items-center">
+        <div class="col-md6" style="padding: 40px;">
+            <div class="form-group">
+              <label>OS Atrasadas</label>
+              
+              <table>
+              	<thead>
+              		<tr>
+              			<th>ID</th>
+              			<th>Logradouro</th>
+              			<th>cliente</th>
+              			<th>instalador</th>
+              			
+              		</tr>
+              	</thead>
+              	<tbody>
+              		<tr th:each="ordensServicoAtrasadas" th:object="${os}">
+              			<th th:text="${os.id}">ID</th>
+              			<th th:text="${os.endereco.logradouro}">log</th>
+              			<th th:text="${os.cliente.nome}">cli</th>
+              			<th th:text="${os.instalador.nome}">inst</th>
+              		</tr>
+              	</tbody>
+              	
+              </table>
+           	</div>
+        </div>
+        
+        <div class="col-md6" style="padding: 40px;">
+            <div class="form-group">
+              <label>OS em Dia</label>
+              <table>
+              	<thead>
+              		<tr>
+              			<th>ID</th>
+              			<th>Logradouro</th>
+              			<th>cliente</th>
+              			<th>instalador</th>
+              			
+              		</tr>
+              	</thead>
+              	<tbody>
+              		<tr th:each="ordensServicoFechadasEmDia" th:object="${os}">
+              			<th th:text="${os.id}">ID</th>
+              			<th th:text="${os.endereco.logradouro}">log</th>
+              			<th th:text="${os.cliente.nome}">cli</th>
+              			<th th:text="${os.instalador.nome}">inst</th>
+              		</tr>
+              	</tbody>
+              	
+              </table>
+              
+           	</div>
+        </div>
+        
+        <div class="col-md6" style="padding: 40px;">
+            <div class="form-group">
+              <label>OS Finalizada</label>
+              
+              <table>
+              	<thead>
+              		<tr>
+              			<th>ID</th>
+              			<th>Logradouro</th>
+              			<th>cliente</th>
+              			<th>instalador</th>
+              			
+              		</tr>
+              	</thead>
+              	<tbody>
+              		<tr th:each="ordensServicoFechadasNoPrazo" th:object="${os}">
+              			<th th:text="${os.id}">ID</th>
+              			<th th:text="${os.endereco.logradouro}">log</th>
+              			<th th:text="${os.cliente.nome}">cli</th>
+              			<th th:text="${os.instalador.nome}">inst</th>
+              		</tr>
+              	</tbody>
+              	
+              </table>
+           	</div>
+        </div>
+        
+      </div>
+      <div class="row" style="padding: 20px;">
+        <div class="col align-self-start">
+          <button class="btn btn-secondary">Voltar</button>
+        </div>
+        <div class="col align-self-end">
+          <button type="submit" class="btn btn-primary">Iniciar Ordem de Serviço</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

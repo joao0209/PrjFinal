@@ -42,7 +42,8 @@ public class OrdemServicoRestController {
 	}
 	
 	@PutMapping("/assumir/{id}")
-	public OrdemServico putOrdemServico(@PathVariable("id") long id, @RequestBody OrdemServico os) {		
+	public OrdemServico putOrdemServico(@PathVariable("id") long id, @RequestBody OrdemServico os) {	
+		System.out.println("ID "+ String.valueOf(id));
 		os.setInstalador(userRepo.findById(id).get());
 		return repo.save(os);
 	}

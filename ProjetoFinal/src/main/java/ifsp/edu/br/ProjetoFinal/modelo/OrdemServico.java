@@ -46,8 +46,6 @@ public class OrdemServico {
 	@PrePersist
 	private void batatinha() {
 		dataContratacao = new Date();
-		dataFinalInstalacao = new Date();
-		dataInicioIntalacao = new Date();
 	}
 
 	public long getId() {
