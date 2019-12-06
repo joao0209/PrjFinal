@@ -20,6 +20,16 @@ public class OrdemServico {
 	@OneToOne
 	private Usuario cliente;
 	
+	private long clienteIdHolder;
+	
+	public long getClienteIdHolder() {
+		return clienteIdHolder;
+	}
+
+	public void setClienteIdHolder(long clienteIdHolder) {
+		this.clienteIdHolder = clienteIdHolder;
+	}
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario instalador;
 

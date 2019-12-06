@@ -29,6 +29,15 @@ public class Usuario {
 	private String password;
 	private String nome;
 	private String email;
+	public String getTipoHolder() {
+		return tipoHolder;
+	}
+
+	public void setTipoHolder(String tipoHolder) {
+		this.tipoHolder = tipoHolder;
+	}
+
+	private String tipoHolder;
 	private boolean habilitado;
 	private Date creationDate;
 
@@ -36,16 +45,9 @@ public class Usuario {
 	@JoinColumn(name = "usuario_id")
 	private List<Papel> papeis = new ArrayList<>();
 
-	@SuppressWarnings("unused")
-	private Usuario() {
+	@PrePersist
+	private void vish() {
 		this.creationDate = new Date();
-	}
-
-	public Usuario(String username, String password, String nome, String email) {
-		this.username = username;
-		this.password = password;
-		this.nome = nome;
-		this.email = email;
 	}
 
 	public String getNome() {
@@ -98,11 +100,6 @@ public class Usuario {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-	}
-
-	@PrePersist
-	private void data() {
-		this.creationDate = new Date();
 	}
 
 	public List<Papel> getPapeis() {

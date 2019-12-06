@@ -27,15 +27,12 @@ import ifsp.edu.br.ProjetoFinal.modelo.Usuario;
 
 @Controller
 @RequestMapping("/solicitacao")
-@SessionAttributes("solicitacao")
 public class OrdemServicoController {
 	@Autowired
 	private OrdemServicoRepositorio ordemServicoRepositorio;
 	
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
-	
-	private Usuario fakeCliente;
 
 	@GetMapping
 	public String ordemServico(Model model) {
@@ -46,7 +43,7 @@ public class OrdemServicoController {
 		mOrdemServico.setDataContratacao(new Date());
 		
 		model.addAttribute("ordemServico", mOrdemServico); 
-		
+		model.addAttribute("usuariosList",usuarioRepositorio.findAllByRole("CLIENTE"));
 		
 		return "solicitacao";
 	}
@@ -80,20 +77,19 @@ public class OrdemServicoController {
 
 	@PostMapping
 	public String processar(@Valid OrdemServico ordemServico, Errors errors, SessionStatus sessionStatus) {
-		System.out.println("-----Ordem de servi�o----");
-		System.out.println(ordemServico.getPlano());
+		
+		System.out.println("-----Ordem de servi�o----"); 
+		System.out.println(ordemServico.getPlano()); 
 		System.out.println(ordemServico.getEndereco().getLogradouro());
 		System.out.println(ordemServico.getEndereco().getNumero());
 		System.out.println(ordemServico.getEndereco().getBairro());
 		System.out.println(ordemServico.getEndereco().getCep());
-
-		fakeCliente = new Usuario("LBugada", "123", "Lucas Bugada", "bugada.lucas@gmail.com");
-		usuarioRepositorio.save(fakeCliente);
-		
-		ordemServico.setCliente(fakeCliente);
+		ordemServico.setCliente(usuarioRepositorio.findById(ordemServico.getClienteIdHolder()).get());
 		ordemServicoRepositorio.save(ordemServico);
 		sessionStatus.setComplete();
 
 		return "redirect:/";
 	}
+	
+ 
 }

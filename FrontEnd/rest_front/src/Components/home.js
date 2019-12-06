@@ -14,6 +14,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Search from '@material-ui/icons/Search'
 import DoneOutline from '@material-ui/icons/DoneOutline';
 import InsideModalFinalizar from './InsideModalFinalizar';
+import Header from './header';
 
 export default class home extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ export default class home extends Component {
             openListar: false,
             os: [],
             osAssumidos: [],
+            instaladores: [],
             currId: "",
             currOS: [],
             tipo: "naoAssumidos",
@@ -32,6 +34,7 @@ export default class home extends Component {
             }
         }
         this.triggerUpdateNaoAssumidas.bind(this);
+        this.changeSelectedInstaller.bind(this);
     }
 
     //Recupera lista e adiciona os OS sem instaladores para uma lista  
@@ -60,6 +63,29 @@ export default class home extends Component {
                 os: [...this.state.os, auxOS]
             });
 
+        }
+    };
+
+    triggerUpdateInstallers = async () => {
+        const installCall = await fetch('http://localhost:8082/api/os/getAllInstallers', {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        });
+        const responseList = await installCall.json();
+        this.setState({ instaladores: [] });
+        for (var i = 0; i < responseList.length; i++) {
+            const auxInst = {
+                id: responseList[i].id,
+                username: responseList[i].username,
+                password: responseList[i].password,
+                nome: responseList[i].nome,
+                email: responseList[i].email,
+            };
+            this.setState({
+                instaladores: [...this.state.instaladores, auxInst]
+            })
         }
     };
 
@@ -95,6 +121,7 @@ export default class home extends Component {
     async componentDidMount() {
         this.triggerUpdateAssumidas();
         this.triggerUpdateNaoAssumidas();
+        this.triggerUpdateInstallers();
     };
 
     printList() {
@@ -161,9 +188,19 @@ export default class home extends Component {
         }
     };
 
+    changeSelectedInstaller= async (installer) =>{
+        console.log('onChangeInstall');
+        this.setState({instalador: {id: installer}});
+        if(this.state.instalador){
+            this.triggerUpdateAssumidas();
+            this.triggerUpdateNaoAssumidas();
+        }
+    }
+
     render() {
         return (
             <div>
+                <Header onChangeS={this.changeSelectedInstaller} lista={this.state.instaladores}/>
                 <Modal open={this.state.open} onClose={()=>this.handleClose('naoAssumidos')}>
                     <InsideModalAssumir 
                         onClose={()=>this.handleClose('naoAssumidos')} 

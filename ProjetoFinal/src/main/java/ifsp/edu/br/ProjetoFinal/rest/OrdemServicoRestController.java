@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ifsp.edu.br.ProjetoFinal.data.OrdemServicoRepositorio;
 import ifsp.edu.br.ProjetoFinal.data.UsuarioRepositorio;
 import ifsp.edu.br.ProjetoFinal.modelo.OrdemServico;
+import ifsp.edu.br.ProjetoFinal.modelo.Usuario;
 
 @RestController
 @RequestMapping("/api/os")
@@ -29,6 +30,11 @@ public class OrdemServicoRestController {
 	@GetMapping(produces = "application/json")
 	public Iterable<OrdemServico> getAll() {
 		return repo.findAll();
+	}
+	
+	@GetMapping(path="/getAllInstallers", produces = "application/json")
+	public Iterable<Usuario> getAllInstallers() {
+		return userRepo.findAllByRole("INSTALADOR");
 	}
 	
 	@GetMapping(path = "/notHasInstaller", produces = "application/json")

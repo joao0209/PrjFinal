@@ -14,8 +14,31 @@
 </head>
 
 <body>
-  <div class="container" style="padding: 20px;">
-    <form method="POST" th:action="@{/solicitacao}" th:object="${ordemServico}">
+  <form method="POST" th:action="@{/solicitacao}" th:object="${ordemServico}">
+    <div class="header">
+      <div class="container" style="padding: 20px;">
+        <div class="row align-items-center">
+          <div class="col align-self-start">
+            <h1>EOL</h1>
+          </div>
+          <div class="col align-self-end">
+            <div class="row">
+              <div class="col-md6">
+                <div class="row align-items-center">
+                  <label for="usuario">Usuario:</label>
+                  <select id="usuario" th:field="*{clienteIdHolder}" th:value="*{clienteIdHolder}">
+                    <option th:each="user : ${usuariosList}" th:value="${user.id}" th:text="${user.nome}">
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="padding: 20px;">
+
       <div class="row align-items-center">
         <div class="col-md6" style="padding: 40px;">
           <div class="col-md6" style="padding: 40px;">
@@ -90,10 +113,10 @@
           <button type="submit" class="btn btn-primary">Iniciar Ordem de Serviço</button>
         </div>
       </div>
-    </form>
-  </div>
 
+    </div>
 
+  </form>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
