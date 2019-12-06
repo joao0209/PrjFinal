@@ -59,28 +59,23 @@ public class OrdemServicoController {
 	
 	@ModelAttribute
 	public void popularListaOSAtradas(Model model) {
-		List<OrdemServico> ordensServico = new ArrayList<>(); 				
-		ordemServicoRepositorio.findOsAtrasada().forEach(ordensServico::add);
+		List<OrdemServico> ordensServico = ordemServicoRepositorio.findOsAtrasada();
 	
 		model.addAttribute("ordensServicoAtrasadas", ordensServico);
 	}
 	
 	@ModelAttribute
 	public void popularListaOSFechadasEmDia(Model model) {
-		List<OrdemServico> ordensServico = new ArrayList<>(); 				
-		ordemServicoRepositorio.findOsFechadaEmDia().forEach(ordensServico::add);
+		List<OrdemServico> ordensServico = ordemServicoRepositorio.findOsFechadaEmDia();
 	
 		model.addAttribute("ordensServicoFechadasEmDia", ordensServico);
 	}
 	
 	@ModelAttribute
-	public void popularListaOSFechadaPrazo(Model model) { // Pensar num forma de colocar isso por instalador :(
-		List<OrdemServico> ordensServico = new ArrayList<>(); 				
-		ordemServicoRepositorio.findOsFechadaEmDia().forEach(ordensServico::add);
+	public void popularListaUsuarioOSFechadaPrazo(Model model) { // Pensar num forma de colocar isso por instalador :(
+		List<Usuario> instaladoresAtradados = ordemServicoRepositorio.findInstaladorComOSAtrasada();
 		
-		System.out.println("estamos aqui");
-	
-		model.addAttribute("ordensServicoFechadasNoPrazo", ordensServico);
+		model.addAttribute("instaladoresAtradados", instaladoresAtradados);
 	}
 
 	@PostMapping
